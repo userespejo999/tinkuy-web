@@ -1,0 +1,21 @@
+{
+  "storeId": "a1b2c3-uuid",
+  "reservations": [
+    {
+      "reservationId": "r001-uuid",
+      "reservationCode": "SL-4821",
+      "productName": "Cargador USB-C 65W",
+      "userName": "Carlos M.",
+      "status": "pending",
+      "expiresAt": "2026-06-25T19:30:00Z"
+    },
+    {
+      "reservationId": "r002-uuid",
+      "reservationCode": "SL-4822",
+      "productName": "Foco LED 12W",
+      "userName": "Ana R.",
+      "status": "completed",
+      "expiresAt": "2026-06-24T15:00:00Z"
+    }
+  ]
+}

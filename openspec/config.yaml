@@ -1,0 +1,47 @@
+# OpenSpec Configuration — tinkuy-web
+# StockLink Vision — Merchant Panel (React Web)
+
+schema: spec-driven
+
+context: |
+  Project: StockLink Vision — React web panel for merchants
+  Role: Web dashboard for merchants to view inventory, camera status, and reservations
+  Stack (planned): Vite + React + TypeScript
+  Architecture: Component-based React with container/presentational pattern
+  API Contract: See PROMPT-BASE.md for full REST API spec
+  Persistence: No code scaffold yet — project is in docs/mockup phase
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include component hierarchy for complex UI
+    - Document API integration points against PROMPT-BASE.md contract
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    - Follow existing code patterns
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: ""
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
+
+testing:
+  strict_tdd: false
+  reason: "No test runner detected — project is in early scaffold phase. Vitest recommended once deps are installed."
+  runner: null
+  coverage: false
+  layers: []
+
+persistence:
+  mode: hybrid
+  openspec_path: ./openspec
+  engram_project: tinkuy-web

@@ -1,0 +1,1 @@
+const e="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdG9yZUlkIjoiYTFiMmMzLXV1aWQiLCJzdG9yZU5hbWUiOiJUZWNoIFN0b3JlIExpbmNlIiwiaWF0IjoxNjU2MTI5NjAwLCJleHAiOjE2NTYxMzMyMDB9",o="a1b2c3-uuid",t="Tech Store Lince",I={token:e,storeId:o,storeName:t};export{I as default,o as storeId,t as storeName,e as token};

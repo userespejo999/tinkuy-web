@@ -1,0 +1,43 @@
+{
+  "storeId": "a1b2c3-uuid",
+  "storeName": "Tech Store Lince",
+  "cameraStatus": "online",
+  "lastSyncAt": "2026-06-25T18:02:00Z",
+  "inventory": [
+    {
+      "inventoryId": "8f14e3-uuid",
+      "productName": "Cargador USB-C 65W",
+      "stockQuantity": 8,
+      "price": 45.00,
+      "updatedAt": "2026-06-25T18:02:00Z"
+    },
+    {
+      "inventoryId": "8f14e4-uuid",
+      "productName": "Foco LED 12W",
+      "stockQuantity": 15,
+      "price": 18.00,
+      "updatedAt": "2026-06-25T18:02:00Z"
+    },
+    {
+      "inventoryId": "8f14e5-uuid",
+      "productName": "Coca-Cola 500ml",
+      "stockQuantity": 50,
+      "price": 2.50,
+      "updatedAt": "2026-06-25T18:02:00Z"
+    },
+    {
+      "inventoryId": "8f14e6-uuid",
+      "productName": "Papas Lay's Original",
+      "stockQuantity": 30,
+      "price": 3.00,
+      "updatedAt": "2026-06-25T18:02:00Z"
+    },
+    {
+      "inventoryId": "8f14e7-uuid",
+      "productName": "Jabón Dove",
+      "stockQuantity": 25,
+      "price": 4.50,
+      "updatedAt": "2026-06-25T18:02:00Z"
+    }
+  ]
+}
