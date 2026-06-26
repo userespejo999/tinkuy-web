@@ -1,8 +1,9 @@
 import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Package, Video, Calendar, Menu, X } from 'lucide-react';
+import { Home, Package, Video, Calendar, Bell, Menu, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Button } from './Button';
+import { NotificationBell } from './NotificationBell';
 
 interface LayoutProps {
   children: ReactNode;
@@ -18,6 +19,7 @@ export const Layout = ({ children }: LayoutProps) => {
     { path: '/inventario', label: 'Inventario', icon: <Package size={20} /> },
     { path: '/cameras', label: 'Cámaras', icon: <Video size={20} /> },
     { path: '/reservas', label: 'Reservas', icon: <Calendar size={20} /> },
+    { path: '/notificaciones', label: 'Notificaciones', icon: <Bell size={20} /> },
   ];
 
   return (
@@ -69,6 +71,7 @@ export const Layout = ({ children }: LayoutProps) => {
           <h2 className="text-2xl font-bold text-navy-500">
             {navItems.find((item) => item.path === pathname)?.label || 'Inicio'}
           </h2>
+          <NotificationBell />
         </header>
         {children}
       </main>

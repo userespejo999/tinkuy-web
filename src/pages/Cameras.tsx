@@ -4,15 +4,18 @@ import { Badge } from '../components/Badge';
 import { Skeleton } from '../components/Skeleton';
 import { fetchDetections } from '../services/api';
 import { DetectionsResponse } from '../types';
+import { useAuth } from '../context/AuthContext';
 
 export const Cameras = () => {
+  const { storeId } = useAuth();
   const [detections, setDetections] = useState<DetectionsResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!storeId) return;
     const loadData = async () => {
       try {
-        const data = await fetchDetections('a1b2c3-uuid');
+        const data = await fetchDetections(storeId);
         setDetections(data);
       } catch (err) {
         console.error('Failed to fetch detections:', err);
@@ -21,7 +24,7 @@ export const Cameras = () => {
       }
     };
     loadData();
-  }, []);
+  }, [storeId]);
 
   return (
     <div className="space-y-6">

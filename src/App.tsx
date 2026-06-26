@@ -7,6 +7,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Inventory } from './pages/Inventory';
 import { Cameras } from './pages/Cameras';
 import { Reservations } from './pages/Reservations';
+import { Notifications } from './pages/Notifications';
 
 export default function App() {
   return (
@@ -49,6 +50,16 @@ export default function App() {
             <AuthGuard>
               <Layout>
                 <Reservations />
+              </Layout>
+            </AuthGuard>
+          )}
+        />
+        <Route
+          path="/notificaciones"
+          element={(
+            <AuthGuard>
+              <Layout>
+                <Notifications />
               </Layout>
             </AuthGuard>
           )}

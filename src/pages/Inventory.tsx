@@ -3,15 +3,18 @@ import { Card } from '../components/Card';
 import { Skeleton } from '../components/Skeleton';
 import { fetchInventory } from '../services/api';
 import { InventoryResponse } from '../types';
+import { useAuth } from '../context/AuthContext';
 
 export const Inventory = () => {
+  const { storeId } = useAuth();
   const [inventory, setInventory] = useState<InventoryResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!storeId) return;
     const loadData = async () => {
       try {
-        const data = await fetchInventory('a1b2c3-uuid');
+        const data = await fetchInventory(storeId);
         setInventory(data);
       } catch (err) {
         console.error('Failed to fetch inventory:', err);
@@ -20,7 +23,7 @@ export const Inventory = () => {
       }
     };
     loadData();
-  }, []);
+  }, [storeId]);
 
   return (
     <Card>

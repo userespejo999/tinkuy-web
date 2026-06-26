@@ -1,96 +1,162 @@
-# StockLink API — Guía de setup rápido
+# StockLink Vision — Frontend (Panel del Comercio)
 
-## Prerequisitos
+> Panel web React para comerciantes. Consume la API REST del backend para mostrar inventario en tiempo real, estado de cámaras y reservas.
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- [PostgreSQL](https://www.postgresql.org/download/) corriendo en `localhost:5432`
-- `dotnet-ef` instalado globalmente:
-  ```bash
-  dotnet tool install --global dotnet-ef
-  ```
+---
+
+## Prerrequisitos
+
+- [Node.js](https://nodejs.org/) v18+ (recomendado v20 LTS)
+- npm (viene con Node.js)
+- El backend corriendo (ver [SETUP.md del backend](https://github.com/tu-org/tinkuy-api/blob/main/SETUP.md))
+
+Verifica tu instalación:
+```bash
+node -v   # Debe mostrar v18+ o v20+
+npm -v    # Debe mostrar 9+
+```
 
 ---
 
 ## 1. Clonar y entrar al proyecto
 
 ```bash
-git clone <url-del-repo>
-cd TinkuyAPI/StockLinkApi
+git clone <url-de-tu-repo-frontend>
+cd Tinkuy-web
 ```
 
 ---
 
-## 2. Crear la base de datos
-
-En psql o pgAdmin:
-```sql
-CREATE DATABASE stocklink_db;
-\c stocklink_db
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-```
-
----
-
-## 3. Crear `appsettings.Development.json`
-
-Este archivo **no está en el repo** (tiene credenciales). Créalo manualmente en `StockLinkApi/`:
-
-```json
-{
-  "ConnectionStrings": {
-    "Default": "Host=localhost;Port=5432;Database=stocklink_db;Username=postgres;Password=TU_PASSWORD"
-  },
-  "GeminiApiKey": "TU_API_KEY",
-  "UseMockVision": true
-}
-```
-
-> `UseMockVision: true` → no necesita API key de Gemini para correr.  
-> `UseMockVision: false` → usa Gemini real. API key en [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (gratis).
-
----
-
-## 4. Aplicar migraciones
+## 2. Instalar dependencias
 
 ```bash
-dotnet ef database update
+npm install
 ```
+
+Esto instala: React 18, Vite, TypeScript, Tailwind CSS, Framer Motion, Recharts, React Router, Lucide React.
 
 ---
 
-## 5. Correr el proyecto
+## 3. Configurar variables de entorno
+
+El proyecto incluye un archivo `.env` preconfigurado. Revisa que esté así:
 
 ```bash
-dotnet run
+# Modo MOCK (desarrollo sin backend — usa datos estáticos)
+VITE_API_BASE_URL=
+
+# Modo REAL (cuando el backend esté listo)
+# Descomenta la línea de abajo y comenta la de arriba
+# VITE_API_BASE_URL=http://localhost:5124/api
 ```
 
-El servidor levanta en **`http://localhost:5124`**.  
-Al iniciar carga automáticamente datos de prueba (3 tiendas, 12 productos, inventario).
+> **Nota:** El backend del equipo corre en `http://localhost:5124`. Si tu backend usa otro puerto, cámbialo aquí.
 
 ---
 
-## 6. Verificar que todo funciona
+## 4. Correr el proyecto
 
 ```bash
-# Desde la raíz del repo (TinkuyAPI/)
-powershell -ExecutionPolicy Bypass -File .\validate-endpoints.ps1
+npm run dev
 ```
 
-Debe mostrar **12/12 PASS**.
+El panel levanta en **`http://localhost:3000`**.
 
 ---
 
-## Referencia rápida de endpoints
+## 5. Verificar que todo funciona
 
-| Método | Endpoint | Descripción |
+1. Abre `http://localhost:3000` en tu navegador
+2. Debes ver la pantalla de **Login**
+3. Ingresa cualquier correo y contraseña (modo mock acepta todo)
+4. Debes entrar al **Dashboard** con datos de prueba
+5. Navega por: **Inicio / Inventario / Cámaras / Reservas**
+
+Si ves datos en todas las pantallas, el frontend está listo.
+
+---
+
+## 6. Conectar con el backend real
+
+Cuando tu compañero del backend confirme que la API está corriendo:
+
+1. Abre el archivo `.env`
+2. Comenta la línea del mock:
+   ```env
+   # VITE_API_BASE_URL=
+   ```
+3. Descomenta la línea del backend:
+   ```env
+   VITE_API_BASE_URL=http://localhost:5124/api
+   ```
+4. **Reinicia** el servidor frontend (Ctrl+C, luego `npm run dev`)
+5. Prueba el login con credenciales reales del backend
+
+> **Importante:** Vite solo lee `.env` al arrancar. Siempre reinicia después de cambiar esta variable.
+
+---
+
+## Estructura de archivos clave
+
+```
+src/
+├── mocks/              # Datos estáticos para desarrollo sin backend
+│   ├── auth.json
+│   ├── inventory.json
+│   ├── detections.json
+│   └── reservations.json
+├── services/
+│   └── api.ts          # Cliente HTTP + toggle mock/real
+├── context/
+│   └── AuthContext.tsx # JWT token + estado de sesión
+├── components/         # Componentes reutilizables
+│   ├── Layout.tsx      # Sidebar + Header + contenido
+│   ├── Card.tsx
+│   ├── Button.tsx
+│   ├── Badge.tsx
+│   └── Skeleton.tsx
+├── pages/              # Pantallas principales
+│   ├── Login.tsx
+│   ├── Dashboard.tsx
+│   ├── Inventory.tsx
+│   ├── Cameras.tsx
+│   └── Reservations.tsx
+└── types/
+    └── index.ts        # Interfaces TypeScript (coinciden con API contract)
+```
+
+---
+
+## Referencia rápida de endpoints consumidos
+
+| Método | Endpoint | Usado en pantalla |
 |---|---|---|
-| GET | `/api/products/search?q=cargador&lat=-12.08&lng=-77.03` | Buscar productos |
-| GET | `/api/stores/{storeId}/inventory` | Inventario de tienda |
-| POST | `/api/reservations` | Crear reserva |
-| GET | `/api/reservations/{id}` | Ver reserva |
-| GET | `/api/stores/{storeId}/reservations` | Reservas de tienda |
-| GET | `/api/stores/{storeId}/detections` | Detecciones de cámara |
-| POST | `/api/internal/vision/detect` | Detectar productos con IA |
+| POST | `/api/auth/login` | Login |
+| GET | `/api/stores/{storeId}/inventory` | Dashboard, Inventario, Cámaras |
+| GET | `/api/stores/{storeId}/reservations` | Reservas |
+| GET | `/api/stores/{storeId}/detections?limit=10` | Cámaras |
 
-Documentación completa: `API-Docs.md`  
-Colección Postman: importa `StockLink.postman_collection.json`
+Contrato API completo: `PROMPT-BASE.md` en la raíz del proyecto.
+
+---
+
+## Comandos útiles
+
+```bash
+npm run dev      # Levantar servidor de desarrollo (localhost:3000)
+npm run build    # Compilar para producción (genera dist/)
+npm run preview  # Previsualizar build de producción
+npm run lint     # Revisar código con ESLint
+```
+
+---
+
+## Solución de problemas
+
+| Problema | Causa probable | Solución |
+|---|---|---|
+| `Cannot find module` | Dependencias no instaladas | Corre `npm install` |
+| Pantalla en blanco | Error de compilación | Revisa la terminal, corre `npm run dev` de nuevo |
+| CORS error | Backend no acepta localhost:3000 | Pide a tu compañero del backend que habilite CORS para `http://localhost:3000` |
+| Datos no cargan | `.env` apunta al backend caído | Verifica que el backend esté corriendo en el puerto correcto |
+| Login no funciona | Token JWT expirado | Borra `localStorage` en DevTools → Application → Local Storage → Clear |

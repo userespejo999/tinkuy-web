@@ -16,15 +16,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     storeName: localStorage.getItem('stocklink-vision-store-name'),
   });
 
-  const login = async (emailOrPhone: string, password: string) => {
-    const response: LoginResponse = await apiLogin(emailOrPhone, password);
-    localStorage.setItem('stocklink-vision-token', response.token);
-    localStorage.setItem('stocklink-vision-store-id', response.storeId);
-    localStorage.setItem('stocklink-vision-store-name', response.storeName);
+  const login = async (_emailOrPhone: string, _password: string) => {
+    // MOCK LOGIN: no llama al backend, entra directo
+    const mockResponse: LoginResponse = {
+      token: 'demo-token',
+      storeId: 'a820b85a-2248-48f4-b452-689cf8bfa566',
+      storeName: 'Electro Miraflores',
+    };
+    localStorage.setItem('stocklink-vision-token', mockResponse.token);
+    localStorage.setItem('stocklink-vision-store-id', mockResponse.storeId);
+    localStorage.setItem('stocklink-vision-store-name', mockResponse.storeName);
     setAuthState({
-      token: response.token,
-      storeId: response.storeId,
-      storeName: response.storeName,
+      token: mockResponse.token,
+      storeId: mockResponse.storeId,
+      storeName: mockResponse.storeName,
     });
   };
 

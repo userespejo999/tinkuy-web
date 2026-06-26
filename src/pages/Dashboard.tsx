@@ -4,19 +4,22 @@ import { Badge } from '../components/Badge';
 import { Skeleton } from '../components/Skeleton';
 import { fetchInventory, fetchDetections } from '../services/api';
 import { InventoryResponse, DetectionsResponse } from '../types';
+import { useAuth } from '../context/AuthContext';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export const Dashboard = () => {
+  const { storeId } = useAuth();
   const [inventory, setInventory] = useState<InventoryResponse | null>(null);
   const [detections, setDetections] = useState<DetectionsResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!storeId) return;
     const loadData = async () => {
       try {
         const [inventoryData, detectionsData] = await Promise.all([
-          fetchInventory('a1b2c3-uuid'),
-          fetchDetections('a1b2c3-uuid'),
+          fetchInventory(storeId),
+          fetchDetections(storeId),
         ]);
         setInventory(inventoryData);
         setDetections(detectionsData);
@@ -27,7 +30,7 @@ export const Dashboard = () => {
       }
     };
     loadData();
-  }, []);
+  }, [storeId]);
 
   // Prepare chart data
   const chartData = inventory?.inventory.map((item) => ({

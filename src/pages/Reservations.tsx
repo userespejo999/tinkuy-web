@@ -4,15 +4,18 @@ import { Badge } from '../components/Badge';
 import { Skeleton } from '../components/Skeleton';
 import { fetchReservations } from '../services/api';
 import { ReservationsResponse } from '../types';
+import { useAuth } from '../context/AuthContext';
 
 export const Reservations = () => {
+  const { storeId } = useAuth();
   const [reservations, setReservations] = useState<ReservationsResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!storeId) return;
     const loadData = async () => {
       try {
-        const data = await fetchReservations('a1b2c3-uuid');
+        const data = await fetchReservations(storeId);
         setReservations(data);
       } catch (err) {
         console.error('Failed to fetch reservations:', err);
@@ -21,7 +24,7 @@ export const Reservations = () => {
       }
     };
     loadData();
-  }, []);
+  }, [storeId]);
 
   return (
     <Card>
