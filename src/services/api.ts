@@ -1,3 +1,5 @@
+import { dashboardMock, DashboardData } from '../mocks/dashboard';
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 export const fetchWithAuth = async (endpoint: string, options: RequestInit = {}) => {
@@ -52,4 +54,11 @@ export const fetchReservations = async (storeId: string) => {
     return await import('../mocks/reservations.json').then(res => res.default);
   }
   return fetchWithAuth(`/stores/${storeId}/reservations`);
+};
+
+export const fetchDashboard = async (): Promise<DashboardData> => {
+  // Always returns mock data for demo
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(dashboardMock), 600);
+  });
 };
