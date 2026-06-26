@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { AuthGuard } from './components/AuthGuard';
 import { Layout } from './components/Layout';
 import { Login } from './pages/Login';
@@ -11,8 +12,9 @@ import { Notifications } from './pages/Notifications';
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Routes>
+    <ThemeProvider>
+      <AuthProvider>
+        <Routes>
         <Route path="/login" element={<Login />} />
         <Route
           path="/"
@@ -64,7 +66,8 @@ export default function App() {
             </AuthGuard>
           )}
         />
-      </Routes>
-    </AuthProvider>
+        </Routes>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

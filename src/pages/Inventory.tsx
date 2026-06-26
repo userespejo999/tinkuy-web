@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Card } from '../components/Card';
 import { Skeleton } from '../components/Skeleton';
 import { fetchInventory } from '../services/api';
 import { InventoryResponse } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { Package, AlertTriangle, CheckCircle } from 'lucide-react';
 
 export const Inventory = () => {
   const { storeId } = useAuth();
@@ -25,47 +27,90 @@ export const Inventory = () => {
     loadData();
   }, [storeId]);
 
+  const getStockStatus = (quantity: number) => {
+    if (quantity <= 3) return { color: 'text-red-400', icon: AlertTriangle, label: 'Crítico' };
+    if (quantity <= 8) return { color: 'text-amber-400', icon: AlertTriangle, label: 'Bajo' };
+    return { color: 'text-green-400', icon: CheckCircle, label: 'OK' };
+  };
+
   return (
-    <Card>
-      <h2 className="text-xl font-semibold mb-4">Inventario</h2>
-      {loading ? (
-        <div className="space-y-4">
-          <Skeleton className="h-8 w-full" />
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="grid grid-cols-4 gap-4">
-              <Skeleton className="h-6" />
-              <Skeleton className="h-6" />
-              <Skeleton className="h-6" />
-              <Skeleton className="h-6" />
-            </div>
-          ))}
+    <div className="space-y-6">
+      <Card>
+        <div className="flex items-center space-x-3 mb-6">
+          <div className="p-2 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500">
+            <Package size={20} className="text-white" />
+          </div>
+          <h2 className="text-xl font-bold text-[var(--text-primary)]">Inventario completo</h2>
         </div>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Última actualización</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {inventory?.inventory.map((item) => (
-                <tr key={item.inventoryId}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.productName}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.stockQuantity}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">S/. {item.price.toFixed(2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {new Date(item.updatedAt).toLocaleString()}
-                  </td>
+        
+        {loading ? (
+          <div className="space-y-4">
+            <Skeleton className="h-8 w-full" />
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="grid grid-cols-4 gap-4">
+                <Skeleton className="h-6" />
+                <Skeleton className="h-6" />
+                <Skeleton className="h-6" />
+                <Skeleton className="h-6" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-[var(--border-subtle)]">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Producto</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Stock</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Precio</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Estado</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider">Actualizado</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </Card>
+              </thead>
+              <tbody>
+                {inventory?.inventory.map((item, index) => {
+                  const status = getStockStatus(item.stockQuantity);
+                  const StatusIcon = status.icon;
+                  
+                  return (
+                    <motion.tr 
+                      key={item.inventoryId}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="border-b border-[var(--border-subtle)]/50 hover:bg-[var(--accent-primary)]/5 transition-colors"
+                    >
+                      <td className="py-4 px-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-400 to-amber-400 flex items-center justify-center text-white text-xs font-bold">
+                            {item.productName.charAt(0)}
+                          </div>
+                          <span className="font-medium text-[var(--text-primary)]">{item.productName}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className={`font-bold ${status.color}`}>{item.stockQuantity}</span>
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className="font-semibold text-[var(--accent-primary)]">S/. {item.price.toFixed(2)}</span>
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className={`inline-flex items-center space-x-1 text-xs font-medium ${status.color}`}>
+                          <StatusIcon size={14} />
+                          <span>{status.label}</span>
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-sm text-[var(--text-muted)]">
+                        {new Date(item.updatedAt).toLocaleDateString()}
+                      </td>
+                    </motion.tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+    </div>
   );
 };

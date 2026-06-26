@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
-import { ShoppingCart, AlertTriangle, Camera, Check, Trash2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Button } from '../components/Button';
+import { ShoppingCart, AlertTriangle, Camera, Check, Trash2, Bell } from 'lucide-react';
 
 interface Notification {
   id: string;
@@ -57,10 +58,10 @@ const initialNotifications: Notification[] = [
 ];
 
 const typeConfig = {
-  reservation: { icon: ShoppingCart, color: 'bg-blue-100 text-blue-600', label: 'Reserva' },
-  stock: { icon: Camera, color: 'bg-green-100 text-green-600', label: 'Stock' },
-  alert: { icon: AlertTriangle, color: 'bg-red-100 text-red-600', label: 'Alerta' },
-  camera: { icon: Camera, color: 'bg-purple-100 text-purple-600', label: 'Cámara' },
+  reservation: { icon: ShoppingCart, gradient: 'from-blue-500 to-indigo-500', label: 'Reserva' },
+  stock: { icon: Camera, gradient: 'from-green-500 to-emerald-500', label: 'Stock' },
+  alert: { icon: AlertTriangle, gradient: 'from-red-500 to-orange-500', label: 'Alerta' },
+  camera: { icon: Camera, gradient: 'from-purple-500 to-pink-500', label: 'Cámara' },
 };
 
 export const Notifications = () => {
@@ -90,60 +91,71 @@ export const Notifications = () => {
   return (
     <div className="space-y-6">
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
-          <h3 className="text-sm font-medium text-gray-500">Total notificaciones</h3>
-          <p className="text-2xl font-bold mt-1">{notifications.length}</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card delay={0}>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-[var(--text-muted)]">Total notificaciones</p>
+              <p className="text-3xl font-bold text-[var(--text-primary)] mt-1">{notifications.length}</p>
+            </div>
+            <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg shadow-blue-500/30">
+              <Bell size={24} className="text-white" />
+            </div>
+          </div>
         </Card>
-        <Card>
-          <h3 className="text-sm font-medium text-gray-500">No leídas</h3>
-          <p className="text-2xl font-bold mt-1 text-red-500">{unreadCount}</p>
+        <Card delay={0.1}>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-[var(--text-muted)]">No leídas</p>
+              <p className="text-3xl font-bold text-red-400 mt-1">{unreadCount}</p>
+            </div>
+            <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 shadow-lg shadow-red-500/30">
+              <AlertTriangle size={24} className="text-white" />
+            </div>
+          </div>
         </Card>
-        <Card>
-          <h3 className="text-sm font-medium text-gray-500">Leídas</h3>
-          <p className="text-2xl font-bold mt-1">{notifications.length - unreadCount}</p>
+        <Card delay={0.2}>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-[var(--text-muted)]">Leídas</p>
+              <p className="text-3xl font-bold text-green-400 mt-1">{notifications.length - unreadCount}</p>
+            </div>
+            <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg shadow-green-500/30">
+              <Check size={24} className="text-white" />
+            </div>
+          </div>
         </Card>
       </div>
 
       {/* Filters */}
-      <Card>
+      <Card delay={0.3}>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex space-x-2">
-            <button
+            <Button
+              variant={filter === 'all' ? 'primary' : 'secondary'}
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                filter === 'all' ? 'bg-navy-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
             >
               Todas
-            </button>
-            <button
+            </Button>
+            <Button
+              variant={filter === 'unread' ? 'primary' : 'secondary'}
               onClick={() => setFilter('unread')}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                filter === 'unread' ? 'bg-navy-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
             >
               No leídas {unreadCount > 0 && `(${unreadCount})`}
-            </button>
+            </Button>
           </div>
           <div className="flex space-x-2">
             {unreadCount > 0 && (
-              <button
-                onClick={markAllAsRead}
-                className="flex items-center space-x-2 px-4 py-2 text-sm text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-md transition-colors"
-              >
-                <Check size={16} />
-                <span>Marcar todas como leídas</span>
-              </button>
+              <Button variant="ghost" onClick={markAllAsRead}>
+                <Check size={16} className="mr-2" />
+                Marcar todas
+              </Button>
             )}
             {notifications.length > 0 && (
-              <button
-                onClick={clearAll}
-                className="flex items-center space-x-2 px-4 py-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
-              >
-                <Trash2 size={16} />
-                <span>Limpiar todo</span>
-              </button>
+              <Button variant="ghost" onClick={clearAll}>
+                <Trash2 size={16} className="mr-2" />
+                Limpiar
+              </Button>
             )}
           </div>
         </div>
@@ -153,15 +165,16 @@ export const Notifications = () => {
       <div className="space-y-3">
         {filtered.length === 0 ? (
           <Card>
-            <div className="p-8 text-center text-gray-500">
-              <p className="text-lg">No hay notificaciones</p>
-              <p className="text-sm mt-1">Las notificaciones aparecerán aquí cuando ocurran eventos</p>
+            <div className="p-8 text-center">
+              <Bell size={48} className="mx-auto text-[var(--text-muted)] mb-4" />
+              <p className="text-lg text-[var(--text-primary)] font-semibold">No hay notificaciones</p>
+              <p className="text-sm text-[var(--text-muted)] mt-1">Las notificaciones aparecerán aquí cuando ocurran eventos</p>
             </div>
           </Card>
         ) : (
-          filtered.map((notification) => {
+          filtered.map((notification, index) => {
             const Icon = typeConfig[notification.type].icon;
-            const colorClass = typeConfig[notification.type].color;
+            const gradient = typeConfig[notification.type].gradient;
             const typeLabel = typeConfig[notification.type].label;
 
             return (
@@ -170,26 +183,27 @@ export const Notifications = () => {
                 layout
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
               >
-                <Card className={`${!notification.isRead ? 'border-l-4 border-l-blue-500' : ''}`}>
+                <Card className={`${!notification.isRead ? 'border-l-4 border-l-[var(--accent-primary)]' : ''}`}>
                   <div className="flex items-start space-x-4">
-                    <div className={`p-3 rounded-full ${colorClass} flex-shrink-0`}>
-                      <Icon size={20} />
+                    <div className={`p-3 rounded-xl bg-gradient-to-br ${gradient} shadow-lg flex-shrink-0`}>
+                      <Icon size={20} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between flex-wrap gap-2">
                         <div className="flex items-center space-x-2">
-                          <h3 className="font-semibold text-gray-800">{notification.title}</h3>
+                          <h3 className="font-semibold text-[var(--text-primary)]">{notification.title}</h3>
                           <Badge status={notification.type === 'alert' ? 'offline' : notification.type === 'reservation' ? 'pending' : 'online'} />
-                          <span className="text-xs text-gray-400">({typeLabel})</span>
+                          <span className="text-xs text-[var(--text-muted)]">({typeLabel})</span>
                         </div>
-                        <span className="text-xs text-gray-400">{notification.time}</span>
+                        <span className="text-xs text-[var(--text-muted)]">{notification.time}</span>
                       </div>
-                      <p className="text-gray-600 mt-1">{notification.message}</p>
+                      <p className="text-[var(--text-secondary)] mt-1">{notification.message}</p>
                       {!notification.isRead && (
                         <button
                           onClick={() => markAsRead(notification.id)}
-                          className="mt-3 text-sm text-teal-600 hover:text-teal-700 font-medium"
+                          className="mt-3 text-sm text-[var(--accent-primary)] hover:text-[var(--accent-secondary)] font-semibold transition-colors"
                         >
                           Marcar como leída
                         </button>
