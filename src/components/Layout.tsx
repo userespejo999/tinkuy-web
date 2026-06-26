@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Package, Video, Calendar, Bell, Menu, X, Sun, Moon } from 'lucide-react';
+import { Home, Package, Video, Calendar, Bell, Menu, X, Sun, Moon, Lock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { Button } from './Button';
@@ -17,11 +17,11 @@ export const Layout = ({ children }: LayoutProps) => {
   const { theme, toggleTheme } = useTheme();
 
   const navItems = [
-    { path: '/', label: 'Inicio', icon: <Home size={20} /> },
-    { path: '/inventario', label: 'Inventario', icon: <Package size={20} /> },
-    { path: '/cameras', label: 'Cámaras', icon: <Video size={20} /> },
-    { path: '/reservas', label: 'Reservas', icon: <Calendar size={20} /> },
-    { path: '/notificaciones', label: 'Notificaciones', icon: <Bell size={20} /> },
+    { path: '/', label: 'Inicio', icon: <Home size={20} />, disabled: false },
+    { path: '/inventario', label: 'Inventario', icon: <Package size={20} />, disabled: false },
+    { path: '/cameras', label: 'Cámaras', icon: <Video size={20} />, disabled: false },
+    { path: '/reservas', label: 'Reservas', icon: <Calendar size={20} />, disabled: true },
+    { path: '/notificaciones', label: 'Notificaciones', icon: <Bell size={20} />, disabled: false },
   ];
 
   return (
@@ -67,7 +67,23 @@ export const Layout = ({ children }: LayoutProps) => {
         
         <nav className="relative p-4 space-y-1">
           {navItems.map((item) => {
-            const isActive = pathname === item.path;
+            const isActive = pathname === item.path && !item.disabled;
+            if (item.disabled) {
+              return (
+                <div
+                  key={item.path}
+                  className="flex items-center space-x-3 p-3 rounded-xl opacity-40 cursor-not-allowed select-none"
+                  title="Función premium — disponible próximamente"
+                >
+                  <span className="text-orange-100/50">{item.icon}</span>
+                  <span className="font-medium text-orange-100/50">{item.label}</span>
+                  <span className="ml-auto inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/20">
+                    <Lock size={10} className="text-orange-300/70" />
+                    <span className="text-[10px] font-bold text-orange-300/70 uppercase tracking-wider">PRO</span>
+                  </span>
+                </div>
+              );
+            }
             return (
               <Link
                 key={item.path}
