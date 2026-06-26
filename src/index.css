@@ -8,7 +8,7 @@
   /* Light Mode - Clean White with Orange Accents */
   --bg-primary: #f8f9fa;
   --bg-secondary: rgba(241, 243, 245, 0.8);
-  --bg-sidebar: linear-gradient(180deg, #1a0f00 0%, #2d1a05 100%);
+  --bg-sidebar: linear-gradient(180deg, #c2410c 0%, #7c2d12 100%);
   --bg-card: rgba(255, 255, 255, 0.92);
 
   --accent-primary: #f97316;

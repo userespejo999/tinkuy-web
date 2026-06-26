@@ -52,19 +52,19 @@ export const Layout = ({ children }: LayoutProps) => {
         {/* Glass overlay on sidebar */}
         <div className="absolute inset-0 bg-gradient-to-b from-orange-900/20 to-transparent pointer-events-none" />
         
-        <div className="relative p-6 border-b border-white/10">
+        <div className="relative p-6 border-b border-white/15">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-amber-400 flex items-center justify-center shadow-lg shadow-black/20">
               <Package size={20} className="text-white" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-white tracking-tight">StockLink</h1>
-              <p className="text-xs text-orange-300/80 font-medium">Vision</p>
+              <p className="text-xs text-orange-200/80 font-medium">Vision</p>
             </div>
           </div>
-          <p className="text-sm text-orange-200/60 mt-3 truncate">{storeName}</p>
+          <p className="text-sm text-white/60 mt-3 truncate">{storeName}</p>
         </div>
-        
+
         <nav className="relative p-4 space-y-1">
           {navItems.map((item) => {
             const isActive = pathname === item.path && !item.disabled;
@@ -72,14 +72,14 @@ export const Layout = ({ children }: LayoutProps) => {
               return (
                 <div
                   key={item.path}
-                  className="flex items-center space-x-3 p-3 rounded-xl opacity-40 cursor-not-allowed select-none"
+                  className="flex items-center space-x-3 p-3 rounded-xl opacity-35 cursor-not-allowed select-none"
                   title="Función premium — disponible próximamente"
                 >
-                  <span className="text-orange-100/50">{item.icon}</span>
-                  <span className="font-medium text-orange-100/50">{item.label}</span>
-                  <span className="ml-auto inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/20">
-                    <Lock size={10} className="text-orange-300/70" />
-                    <span className="text-[10px] font-bold text-orange-300/70 uppercase tracking-wider">PRO</span>
+                  <span className="text-white/40">{item.icon}</span>
+                  <span className="font-medium text-white/40">{item.label}</span>
+                  <span className="ml-auto inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-white/10 border border-white/15">
+                    <Lock size={10} className="text-white/60" />
+                    <span className="text-[10px] font-bold text-white/60 uppercase tracking-wider">PRO</span>
                   </span>
                 </div>
               );
@@ -90,25 +90,25 @@ export const Layout = ({ children }: LayoutProps) => {
                 to={item.path}
                 onClick={() => setIsSidebarOpen(false)}
                 className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 group ${
-                  isActive 
-                    ? 'bg-gradient-to-r from-orange-500/20 to-amber-500/10 text-orange-300 border border-orange-500/30 shadow-lg shadow-orange-500/10' 
-                    : 'text-orange-100/70 hover:bg-white/5 hover:text-orange-200'
+                  isActive
+                    ? 'bg-white/20 text-white border border-white/25 shadow-lg shadow-black/10'
+                    : 'text-white/70 hover:bg-white/10 hover:text-white'
                 }`}
               >
-                <span className={`transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-orange-400' : ''}`}>
+                <span className={`transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-white' : ''}`}>
                   {item.icon}
                 </span>
                 <span className="font-medium">{item.label}</span>
                 {isActive && (
-                  <div className="ml-auto w-2 h-2 rounded-full bg-orange-400 shadow-lg shadow-orange-400/50" />
+                  <div className="ml-auto w-2 h-2 rounded-full bg-white shadow-lg shadow-white/30" />
                 )}
               </Link>
             );
           })}
         </nav>
-        
+
         <div className="absolute bottom-4 left-4 right-4 space-y-2">
-          <Button onClick={logout} variant="secondary" className="w-full bg-white/5 hover:bg-white/10 text-orange-100/80 border border-white/10">
+          <Button onClick={logout} variant="secondary" className="w-full bg-white/10 hover:bg-white/15 text-white/90 border border-white/15">
             Cerrar sesión
           </Button>
         </div>
