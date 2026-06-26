@@ -5,30 +5,30 @@
 @tailwind utilities;
 
 :root {
-  /* Light Mode - Orange Warm Palette */
-  --bg-primary: #fff7ed;
-  --bg-secondary: rgba(255, 237, 213, 0.6);
+  /* Light Mode - Clean White with Orange Accents */
+  --bg-primary: #f8f9fa;
+  --bg-secondary: rgba(241, 243, 245, 0.8);
   --bg-sidebar: linear-gradient(180deg, #1a0f00 0%, #2d1a05 100%);
-  --bg-card: rgba(255, 255, 255, 0.7);
-  
+  --bg-card: rgba(255, 255, 255, 0.92);
+
   --accent-primary: #f97316;
   --accent-secondary: #fbbf24;
   --accent-glow: rgba(249, 115, 22, 0.25);
   --accent-gradient: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
-  
+
   --text-primary: #1a0f00;
   --text-secondary: #78350f;
   --text-muted: #a16207;
   --text-inverse: #fff7ed;
-  
-  --border-glass: rgba(255, 255, 255, 0.4);
+
+  --border-glass: rgba(0, 0, 0, 0.06);
   --border-subtle: rgba(249, 115, 22, 0.2);
-  
+
   --success: #22c55e;
   --warning: #ef4444;
   --info: #3b82f6;
-  
-  --shadow-glass: 0 8px 32px rgba(249, 115, 22, 0.15);
+
+  --shadow-glass: 0 4px 24px rgba(0, 0, 0, 0.08);
   --shadow-glow: 0 0 20px rgba(249, 115, 22, 0.3);
 }
 
