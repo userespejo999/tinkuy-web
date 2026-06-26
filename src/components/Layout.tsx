@@ -54,7 +54,7 @@ export const Layout = ({ children }: LayoutProps) => {
         
         <div className="relative p-6 border-b border-white/15">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-amber-400 flex items-center justify-center shadow-lg shadow-black/20">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c2410c] to-[#7c2d12] flex items-center justify-center shadow-lg shadow-black/20">
               <Package size={20} className="text-white" />
             </div>
             <div>
