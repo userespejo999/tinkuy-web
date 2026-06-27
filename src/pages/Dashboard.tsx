@@ -14,6 +14,7 @@ import {
   DollarSign, ShoppingCart, AlertTriangle, Camera,
   Package, Video, Calendar, Download, Lock, ArrowRight,
 } from 'lucide-react';
+import { PageBanner } from '../components/PageBanner';
 
 // Animated counter hook
 const useCountUp = (end: number, duration: number = 1200) => {
@@ -62,6 +63,8 @@ export const Dashboard = () => {
 
   return (
     <div className="space-y-6">
+      <PageBanner title="Panel de control" subtitle="Visualiza el rendimiento de tu negocio" />
+
       {/* KPI Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card delay={0}>

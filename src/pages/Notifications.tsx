@@ -4,6 +4,7 @@ import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { ShoppingCart, AlertTriangle, Camera, Check, Trash2, Bell } from 'lucide-react';
+import { PageBanner } from '../components/PageBanner';
 
 interface Notification {
   id: string;
@@ -90,6 +91,8 @@ export const Notifications = () => {
 
   return (
     <div className="space-y-6">
+      <PageBanner title="Centro de notificaciones" subtitle="Mantente al día con tu negocio" />
+
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card delay={0}>
