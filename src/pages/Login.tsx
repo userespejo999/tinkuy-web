@@ -31,17 +31,17 @@ export const Login = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(249,115,22,0.08)_0%,transparent_60%)]" />
 
         <motion.div
-          className="w-full max-w-md relative z-10"
+          className="w-full max-w-lg relative z-10"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="glass rounded-3xl p-8 md:p-10 border border-[var(--border-glass)] shadow-2xl">
+          <div className="glass rounded-3xl p-10 md:p-12 border border-[var(--border-glass)] shadow-2xl">
             <div className="flex flex-col items-center mb-8">
               <img
                 src="/images/logo-tinkuy.png"
                 alt="Tunky"
-                className="h-16 w-auto mb-3"
+                className="h-20 w-auto mb-3"
               />
               <h1 className="text-2xl font-bold gradient-text">Tunky</h1>
               <p className="text-sm text-[var(--text-muted)]">Panel de comerciantes</p>
@@ -110,7 +110,7 @@ export const Login = () => {
       </div>
 
       {/* Right: Video only */}
-      <div className="hidden lg:block w-4/12 relative overflow-hidden">
+      <div className="hidden lg:block w-5/12 relative overflow-hidden">
         <video
           autoPlay
           muted
