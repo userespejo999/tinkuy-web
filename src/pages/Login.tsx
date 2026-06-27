@@ -40,10 +40,10 @@ export const Login = () => {
             <div className="flex flex-col items-center mb-8">
               <img
                 src="/images/logo-tinkuy.png"
-                alt="Tunky"
+                alt="Tinkuy"
                 className="h-24 w-auto mb-4"
               />
-              <h1 className="text-3xl font-bold gradient-text">Tunky</h1>
+              <h1 className="text-3xl font-bold gradient-text">Tinkuy</h1>
               <p className="text-base text-[var(--text-muted)] mt-1">Panel de comerciantes</p>
             </div>
 
@@ -68,7 +68,7 @@ export const Login = () => {
                   value={emailOrPhone}
                   onChange={(e) => setEmailOrPhone(e.target.value)}
                   className="w-full px-5 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/50 focus:border-[var(--accent-primary)] transition-all"
-                  placeholder="admin@tunky.com"
+                  placeholder="admin@tinkuy.com"
                   required
                 />
               </div>
@@ -102,7 +102,7 @@ export const Login = () => {
 
             <div className="mt-8 text-center">
               <p className="text-sm text-[var(--text-muted)]">
-                Demo: admin@tunky.com / password
+                Demo: admin@tinkuy.com / password
               </p>
             </div>
           </div>
@@ -120,6 +120,17 @@ export const Login = () => {
         >
           <source src="/videos/login-bg.mp4" type="video/mp4" />
         </video>
+
+        {/* Top gradient for slogan readability */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent z-10" />
+
+        {/* Slogan */}
+        <div className="absolute inset-x-0 top-0 z-20 flex items-start justify-center pt-10 px-8">
+          <p className="text-white text-xl md:text-2xl font-semibold text-center leading-relaxed drop-shadow-lg">
+            Porque tu negocio merece crecer,<br />
+            <span className="text-amber-300">el siguiente paso comienza aquí.</span>
+          </p>
+        </div>
       </div>
     </div>
   );

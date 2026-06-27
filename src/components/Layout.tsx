@@ -58,7 +58,7 @@ export const Layout = ({ children }: LayoutProps) => {
               <Package size={20} className="text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white tracking-tight">Tunky</h1>
+              <h1 className="text-xl font-bold text-white tracking-tight">Tinkuy</h1>
               <p className="text-xs text-orange-200/80 font-medium">Vision</p>
             </div>
           </div>
