@@ -121,14 +121,14 @@ export const Login = () => {
           <source src="/videos/login-bg.mp4" type="video/mp4" />
         </video>
 
-        {/* Top gradient for slogan readability */}
-        <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-black/60 to-transparent z-10" />
+        {/* Bottom gradient for slogan readability */}
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/70 to-transparent z-10" />
 
-        {/* Slogan */}
-        <div className="absolute inset-x-0 top-0 z-20 flex items-start justify-center pt-10 px-8">
-          <p className="text-white text-2xl md:text-4xl font-bold text-center leading-relaxed drop-shadow-lg">
-            Porque tu negocio merece crecer,<br />
-            <span className="text-amber-300">el siguiente paso comienza aquí.</span>
+        {/* Slogan at bottom, near login edge */}
+        <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-start pb-12 pl-10 pr-8">
+          <p className="text-white text-3xl md:text-5xl font-extrabold text-left leading-tight drop-shadow-xl">
+            Tu negocio merece crecer<br />
+            <span className="text-amber-300">y el primer paso comienza aquí</span>
           </p>
         </div>
       </div>
