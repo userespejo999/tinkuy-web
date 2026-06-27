@@ -110,7 +110,7 @@ export const Login = () => {
       </div>
 
       {/* Right: Video only */}
-      <div className="hidden lg:block w-5/12 relative overflow-hidden">
+      <div className="hidden lg:block w-4/12 relative overflow-hidden">
         <video
           autoPlay
           muted
