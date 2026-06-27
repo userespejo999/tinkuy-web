@@ -7,7 +7,6 @@ import { fetchDetections } from '../services/api';
 import { DetectionsResponse } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { Camera, Eye, Hash, Package } from 'lucide-react';
-import { PageBanner } from '../components/PageBanner';
 
 export const Cameras = () => {
   const { storeId } = useAuth();
@@ -31,8 +30,6 @@ export const Cameras = () => {
 
   return (
     <div className="space-y-6">
-      <PageBanner title="Monitoreo de cámaras" subtitle="Detección inteligente en tiempo real" />
-
       {/* Camera Status */}
       <Card delay={0}>
         <div className="flex items-center space-x-3 mb-4">
