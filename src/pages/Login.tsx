@@ -122,11 +122,11 @@ export const Login = () => {
         </video>
 
         {/* Top gradient for slogan readability */}
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent z-10" />
+        <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-black/60 to-transparent z-10" />
 
         {/* Slogan */}
         <div className="absolute inset-x-0 top-0 z-20 flex items-start justify-center pt-10 px-8">
-          <p className="text-white text-xl md:text-2xl font-semibold text-center leading-relaxed drop-shadow-lg">
+          <p className="text-white text-2xl md:text-4xl font-bold text-center leading-relaxed drop-shadow-lg">
             Porque tu negocio merece crecer,<br />
             <span className="text-amber-300">el siguiente paso comienza aquí.</span>
           </p>
