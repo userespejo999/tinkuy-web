@@ -1,26 +1,26 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { useAuth } from '../context/AuthContext';
-import { Button } from '../components/Button';
-import { Eye, EyeOff } from 'lucide-react';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useAuth } from "../context/AuthContext";
+import { Button } from "../components/Button";
+import { Eye, EyeOff } from "lucide-react";
 
 export const Login = () => {
-  const [emailOrPhone, setEmailOrPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
       await login(emailOrPhone, password);
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      setError('Credenciales inválidas');
+      setError("Credenciales inválidas");
     }
   };
 
@@ -44,7 +44,9 @@ export const Login = () => {
                 className="h-24 w-auto mb-4"
               />
               <h1 className="text-3xl font-bold gradient-text">Tinkuy</h1>
-              <p className="text-base text-[var(--text-muted)] mt-1">Panel de comerciantes</p>
+              <p className="text-base text-[var(--text-muted)] mt-1">
+                Panel de comerciantes
+              </p>
             </div>
 
             {error && (
@@ -59,7 +61,10 @@ export const Login = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="emailOrPhone" className="block text-base font-medium text-[var(--text-secondary)] mb-3">
+                <label
+                  htmlFor="emailOrPhone"
+                  className="block text-base font-medium text-[var(--text-secondary)] mb-3"
+                >
                   Correo o teléfono
                 </label>
                 <input
@@ -73,13 +78,16 @@ export const Login = () => {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-base font-medium text-[var(--text-secondary)] mb-3">
+                <label
+                  htmlFor="password"
+                  className="block text-base font-medium text-[var(--text-secondary)] mb-3"
+                >
                   Contraseña
                 </label>
                 <div className="relative">
                   <input
                     id="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-5 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/50 focus:border-[var(--accent-primary)] transition-all pr-12"
@@ -124,11 +132,10 @@ export const Login = () => {
         {/* Bottom gradient for slogan readability */}
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/70 to-transparent z-10" />
 
-        {/* Slogan at bottom, aligned with character feet but not too low */}
-        <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-start pb-20 pl-10 pr-8">
-          <p className="text-white text-xl md:text-3xl font-bold text-left leading-snug drop-shadow-xl">
-            Tu negocio merece crecer<br />
-            <span className="text-amber-300">y el primer paso comienza aquí</span>
+        {/* Slogan at bottom, centered and large */}
+        <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-center pb-24 px-6">
+          <p className="text-white text-3xl md:text-5xl font-bold text-center leading-tight drop-shadow-xl w-full">
+            Tu negocio merece crecer y el primer paso comienza aquí
           </p>
         </div>
       </div>
