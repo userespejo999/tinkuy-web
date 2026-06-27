@@ -134,7 +134,7 @@ export const Login = () => {
 
         {/* Slogan at bottom, centered and large */}
         <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-center pb-24 px-6">
-          <p className="text-white text-3xl md:text-5xl font-bold text-center leading-tight drop-shadow-xl w-full">
+          <p className="text-amber-300 text-3xl md:text-5xl font-bold text-center leading-tight drop-shadow-xl w-full">
             Tu negocio merece crecer y el primer paso comienza aquí
           </p>
         </div>
