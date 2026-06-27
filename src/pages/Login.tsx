@@ -122,11 +122,11 @@ export const Login = () => {
         </video>
 
         {/* Bottom gradient for slogan readability */}
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/70 to-transparent z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/70 to-transparent z-10" />
 
-        {/* Slogan at bottom, near login edge */}
-        <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-start pb-12 pl-10 pr-8">
-          <p className="text-white text-3xl md:text-5xl font-extrabold text-left leading-tight drop-shadow-xl">
+        {/* Slogan at bottom, aligned with character feet but not too low */}
+        <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-start pb-20 pl-10 pr-8">
+          <p className="text-white text-xl md:text-3xl font-bold text-left leading-snug drop-shadow-xl">
             Tu negocio merece crecer<br />
             <span className="text-amber-300">y el primer paso comienza aquí</span>
           </p>
