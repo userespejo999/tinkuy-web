@@ -109,13 +109,27 @@ export const Login = () => {
         </motion.div>
       </div>
 
-      {/* Right: Branding */}
+      {/* Right: Video Branding */}
       <div className="hidden lg:flex flex-1 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(249,115,22,0.2)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(251,191,36,0.15)_0%,transparent_50%)]" />
-        
-        <motion.div 
+        {/* Video background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/login-bg.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-slate-900/50" />
+
+        {/* Orange theme radial glows */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(249,115,22,0.25)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(251,191,36,0.2)_0%,transparent_50%)]" />
+
+        <motion.div
           className="relative z-10 max-w-md mx-auto text-center flex flex-col justify-center px-12"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -126,25 +140,25 @@ export const Login = () => {
               <Sparkles size={40} className="text-white" />
             </div>
           </div>
-          <h2 className="text-4xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-4xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
             Conecta tu tienda al mundo digital
           </h2>
-          <p className="text-lg text-gray-300 leading-relaxed">
+          <p className="text-lg text-gray-100 leading-relaxed drop-shadow-md">
             StockLink Vision usa inteligencia artificial para gestionar tu inventario en tiempo real.
           </p>
-          
+
           <div className="mt-12 grid grid-cols-3 gap-4">
-            <div className="glass rounded-xl p-4 text-center">
-              <div className="text-2xl font-bold text-orange-400">AI</div>
-              <div className="text-xs text-gray-400 mt-1">Detección</div>
+            <div className="glass rounded-xl p-4 text-center border border-white/20">
+              <div className="text-2xl font-bold text-orange-400 drop-shadow">AI</div>
+              <div className="text-xs text-gray-200 mt-1">Detección</div>
             </div>
-            <div className="glass rounded-xl p-4 text-center">
-              <div className="text-2xl font-bold text-amber-400">24/7</div>
-              <div className="text-xs text-gray-400 mt-1">Monitoreo</div>
+            <div className="glass rounded-xl p-4 text-center border border-white/20">
+              <div className="text-2xl font-bold text-amber-400 drop-shadow">24/7</div>
+              <div className="text-xs text-gray-200 mt-1">Monitoreo</div>
             </div>
-            <div className="glass rounded-xl p-4 text-center">
-              <div className="text-2xl font-bold text-yellow-400">Real</div>
-              <div className="text-xs text-gray-400 mt-1">Tiempo</div>
+            <div className="glass rounded-xl p-4 text-center border border-white/20">
+              <div className="text-2xl font-bold text-yellow-400 drop-shadow">Real</div>
+              <div className="text-xs text-gray-200 mt-1">Tiempo</div>
             </div>
           </div>
         </motion.div>
